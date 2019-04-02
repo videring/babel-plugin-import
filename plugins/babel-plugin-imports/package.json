@@ -1,0 +1,8 @@
+{
+  "main": "./index.js",
+  "name": "babel-plugin-imports",
+  "version": "0.0.2",
+  "dependencies": {
+    
+  }
+}
