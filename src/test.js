@@ -10,10 +10,12 @@ const code1 = `
     import lodash from 'lodash';
 `;
 const code = `
-    // import iView from 'iview'
-    import { Circle, Table } from 'iview'
-    Vue.component('iCircle', Circle)
+    import iView from 'iview'
+    Vue.use(iView)
+    // import { Circle, Table } from 'iview'
+    // Vue.component('iCircle', Circle)
 `
+
 const result = babel.transform(code, {
     plugins: [
         [
@@ -24,7 +26,8 @@ const result = babel.transform(code, {
                 "transformToDefaultImport": true,
                 "libraryDirectory": "src/components",
                 // "fileName": "vid",
-                "load": 'auto'
+                "load": 'auto',
+                "style": false
             }
         ]
     ]

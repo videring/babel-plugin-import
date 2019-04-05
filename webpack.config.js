@@ -1,6 +1,6 @@
 const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
-require('./src/test')
+// require('./src/test')
 module.exports = {
     entry: './src/index.js',// 入口文件
     output: {

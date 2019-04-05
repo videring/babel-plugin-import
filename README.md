@@ -1,9 +1,9 @@
 # babel-plugin-imports
 插件位于src同级目录plugins中，package.json中引入方式为："babel-plugin-imports": "file:./plugins/babel-plugin-imports"
 # iview按需引入前后对比(都引入了vue及相关loader、template-loader)
-| 全量引入   | 按需引入  | 按需引入全部组件 |
-| -------- | :----: | :----: |
-| 634 KiB | 68.7 KiB | 500 KiB |
+| 全量引入   | 按需引入(Button, Table)  | 按需引入(Button) | 按需引入全部组件 |
+| -------- | :----: | :----: | :----: |
+| 634 KiB | 169 KiB | 73.4 KiB | 501 KiB |
 ```
 // 全量引入方式：
 import iView from 'iview';

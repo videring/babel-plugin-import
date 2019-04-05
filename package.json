@@ -12,7 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@babel/types": "^7.4.0",
-    "uninstall": "0.0.0"
+    "babel-plugin-import-custom": "0.0.6"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",

@@ -127,11 +127,28 @@ class Plugin {
         const libraryName = this.libraryName;
         const types = this.types;
         const pluginState = this.getPluginState(state);
+        let flag = false
+        let indexOfSpec = 0
 
         if (value === libraryName) {
             let newExps = []
             let newImports = []
-            node.specifiers.forEach(spec => {
+            let cssImports = []
+            switch (this.libraryName)  {
+                case 'iview':
+                    if (this.style === true) {
+                        this.style = false
+                        cssImports.push('iview/src/styles/index.less')
+                    } else if (this.style === 'css') {
+                        this.style = false
+                        cssImports.push('iview/dist/styles/iview.css')
+                    }
+                    break
+                default:
+                    break
+            }
+            node.specifiers.forEach((spec, index) => {
+                indexOfSpec = index
                 if (types.isImportSpecifier(spec)) {
                     pluginState.specified[spec.local.name] = spec.imported.name;
                     if (this.load === 'auto' && iviewModule[spec.imported.name]) { // iview: import { Circle, Table } from 'iview'
@@ -155,13 +172,14 @@ class Plugin {
                             }
                             newImports.push(n)
                         }
+                    } else {
+                        flag = true
                     }
                 } else {
                     pluginState.libraryObjs[spec.local.name] = true;
                 }
             });
             if (this.load === 'auto') {
-
                 switch (libraryName) {
                     case 'iview':
                         let asts = []
@@ -176,15 +194,24 @@ class Plugin {
                         for(let exp of newExps) {
                             asts.push(types.expressionStatement(
                                 types.callExpression(
-                                    types.MemberExpression(types.identifier('Vue'), types.identifier('component')),
+                                    types.memberExpression(types.identifier('Vue'), types.identifier('component')),
                                     [types.stringLiteral(exp.value), types.identifier(exp.key)]
                                 )
                             ))
                         }
+                        for(let css of cssImports) {
+                            asts.push(types.importDeclaration([], types.stringLiteral(css)))
+                        }
                         path.replaceWithMultiple(asts)
                         break
                 }
-            } else {
+            } else if ((indexOfSpec === (node.specifiers.length - 1)) && cssImports && cssImports.length) {
+                let asts = []
+                for(let css of cssImports) {
+                    asts.push(types.importDeclaration([], types.stringLiteral(css)))
+                }
+                path.replaceWithMultiple(asts)
+            } else if (!flag) {
                 pluginState.pathsToRemove.push(path);
             }
         }

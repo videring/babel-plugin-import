@@ -8,9 +8,10 @@
 //      },
 //      "syntax-decorators"
 //    ]
-//    ["import", {
-//      "libraryName": "iview",
-//      "libraryDirectory": "src/components"
-//    }]
+    ["import-custom", {
+      "libraryName": "iview",
+      "libraryDirectory": "src/components",
+      "load": "auto"
+    }]
   ]
 }
