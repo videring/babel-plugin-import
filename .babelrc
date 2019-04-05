@@ -1,12 +1,16 @@
 {
   "presets": ["@babel/preset-env"],
   "plugins": [
-    [
-       "imports",
-      {
-        "library": "lodash"
-      },
-      "syntax-decorators"
-    ]
+//    [
+//       "imports",
+//      {
+//        "library": "lodash"
+//      },
+//      "syntax-decorators"
+//    ]
+//    ["import", {
+//      "libraryName": "iview",
+//      "libraryDirectory": "src/components"
+//    }]
   ]
 }

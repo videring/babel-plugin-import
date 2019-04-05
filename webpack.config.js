@@ -1,4 +1,6 @@
 const path = require('path');
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
+require('./src/test')
 module.exports = {
     entry: './src/index.js',// 入口文件
     output: {
@@ -13,7 +15,18 @@ module.exports = {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader'
+            },
+            {
+                test: /\.vue$/,
+                include: /node_modules/,
+                loader: 'vue-loader'
             }
         ]
+    },
+    plugins: [
+        new VueLoaderPlugin()   //15版本需指定plugin
+    ],
+    node: {
+        fs: 'empty'
     }
 }
